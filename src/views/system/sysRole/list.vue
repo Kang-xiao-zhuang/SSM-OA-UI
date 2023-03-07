@@ -6,7 +6,7 @@
         <el-row>
           <el-col :span="24">
             <el-form-item label="角色名称">
-              <el-input v-model="searchObj.roleName" style="width: 100%" placeholder="角色名称" />
+              <el-input v-model="searchObj.roleName" style="width: 100%" placeholder="角色名称"/>
             </el-form-item>
           </el-col>
         </el-row>
@@ -39,7 +39,7 @@
       @selection-change="handleSelectionChange"
     >
 
-      <el-table-column type="selection" />
+      <el-table-column type="selection"/>
 
       <el-table-column label="序号" width="70" align="center">
         <template slot-scope="scope">
@@ -47,18 +47,21 @@
         </template>
       </el-table-column>
 
-      <el-table-column prop="roleName" label="角色名称" />
-      <el-table-column prop="roleCode" label="角色编码" />
-      <el-table-column prop="createTime" label="创建时间" width="160" />
+      <el-table-column prop="roleName" label="角色名称"/>
+      <el-table-column prop="roleCode" label="角色编码"/>
+      <el-table-column prop="createTime" label="创建时间" width="160"/>
       <el-table-column label="操作" width="200" align="center">
         <template slot-scope="scope">
-          <el-button type="primary" icon="el-icon-edit" size="mini" title="修改" @click="edit(scope.row.id)" />
+          <el-button type="primary" icon="el-icon-edit" size="mini" title="修改" @click="edit(scope.row.id)"/>
           <el-button
             type="danger"
             icon="el-icon-delete"
             size="mini"
             title="删除"
             @click="removeDataById(scope.row.id)"
+          />
+          <el-button type="warning" icon="el-icon-baseball" size="mini" @click="showAssignAuth(scope.row)"
+                     title="分配权限"
           />
         </template>
       </el-table-column>
@@ -75,10 +78,10 @@
     <el-dialog title="添加/修改" :visible.sync="dialogVisible" width="40%">
       <el-form ref="dataForm" :model="sysRole" label-width="150px" size="small" style="padding-right: 40px;">
         <el-form-item label="角色名称">
-          <el-input v-model="sysRole.roleName" />
+          <el-input v-model="sysRole.roleName"/>
         </el-form-item>
         <el-form-item label="角色编码">
-          <el-input v-model="sysRole.roleCode" />
+          <el-input v-model="sysRole.roleCode"/>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -207,6 +210,9 @@ export default {
         this.fetchData()
         this.$message.success(response.message)
       })
+    },
+    showAssignAuth(row) {
+      this.$router.push('/system/assignAuth?id=' + row.id + '&roleName=' + row.roleName)
     }
   }
 }

@@ -306,7 +306,6 @@ export default {
         this.fetchData(this.page)
       })
     },
-
     // 根据id更新记录
     updateData() {
       api.updateById(this.sysMenu).then(response => {
